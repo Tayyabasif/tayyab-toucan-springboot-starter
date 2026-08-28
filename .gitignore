@@ -1,0 +1,19 @@
+
+# Eclipse
+.project
+.classpath
+.settings/
+bin/
+
+# Logs
+*.log
+
+# Environment-specific files
+.env
+*.env
+.env.*
+
+# OS files
+.DS_Store
+Thumbs.db
+
