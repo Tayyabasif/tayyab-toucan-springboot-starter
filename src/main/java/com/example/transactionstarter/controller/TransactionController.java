@@ -19,9 +19,6 @@ import com.example.transactionstarter.service.TransactionService;
 public class TransactionController {
 	
 	@Autowired
-	TransactionRepo repo;
-	
-	@Autowired
 	TransactionService service;
 
 	@GetMapping("/transactions")

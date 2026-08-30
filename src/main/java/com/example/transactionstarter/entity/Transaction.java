@@ -37,6 +37,16 @@ public class Transaction {
 		this.transactionType = transactionType;
 		this.transactionStatus = transactionStatus;
 	}
+	
+	public Transaction(String transactionId, String customerId, double amount, Currency currency,
+			TransactionType transactionType) {
+		super();
+		this.transactionId = transactionId;
+		this.customerId = customerId;
+		this.amount = amount;
+		this.currency = currency;
+		this.transactionType = transactionType;
+	}
 
 	public String getTransactionId() {
 		return transactionId;
