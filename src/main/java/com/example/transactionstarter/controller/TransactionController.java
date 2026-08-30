@@ -13,40 +13,39 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.transactionstarter.entity.Transaction;
 import com.example.transactionstarter.entity.TransactionStatus;
 import com.example.transactionstarter.repository.TransactionRepo;
+import com.example.transactionstarter.service.TransactionService;
 
 @RestController
 public class TransactionController {
 	
 	@Autowired
 	TransactionRepo repo;
+	
+	@Autowired
+	TransactionService service;
 
 	@GetMapping("/transactions")
 	public List<Transaction> getTransaction(){
 		
-		return repo.findAll();
+		return service.allTransactionList();
 	}
 	
 	@GetMapping("/transactions/{customerId}")
 	public List<Transaction> getCustomerTransactions(@PathVariable String customerId){
 		
-		return repo.findByCustomerId(customerId);
+		return service.allTransactionList(customerId);
 	}
 	
 	@PostMapping("/transaction")
 	public void createTransaction(@RequestBody Transaction transaction) {
 		
-		if(repo.existsById(transaction.getTransactionId()))
-			throw new IllegalArgumentException("duplicate aadmi kahi ka");
-		repo.save(transaction);
+		service.addTransaction(transaction);
 	}
 	
 	@PutMapping("/transaction/{transactionId}/{transactionStatus}")
 	public Transaction updateTransaction(@PathVariable String transactionId, @PathVariable TransactionStatus transactionStatus){
 		
-		Transaction transaction = repo.findById(transactionId).orElse(null);
-		transaction.setTransactionStatus(transactionStatus);
-		return repo.save(transaction);
+		return service.updateTransactionStatus(transactionId, transactionStatus);
 	}
-	
 	
 }

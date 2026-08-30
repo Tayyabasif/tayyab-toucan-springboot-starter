@@ -22,6 +22,22 @@ public class Transaction {
 	@Enumerated(EnumType.STRING)
 	private TransactionStatus transactionStatus;
 	
+	
+	public Transaction() {
+		
+	}
+	
+	public Transaction(String transactionId, String customerId, double amount, Currency currency,
+			TransactionType transactionType, TransactionStatus transactionStatus) {
+		super();
+		this.transactionId = transactionId;
+		this.customerId = customerId;
+		this.amount = amount;
+		this.currency = currency;
+		this.transactionType = transactionType;
+		this.transactionStatus = transactionStatus;
+	}
+
 	public String getTransactionId() {
 		return transactionId;
 	}
