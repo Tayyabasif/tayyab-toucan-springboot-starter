@@ -6,24 +6,29 @@ import org.springframework.http.ResponseEntity.BodyBuilder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.example.transactionstarter.dto.ErrorResponse;
+
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
 	@ExceptionHandler({IllegalArgumentException.class, InvalidStatusTransitionException.class})
-	public ResponseEntity<String> handleBadRequest(RuntimeException ex){
+	public ResponseEntity<ErrorResponse> handleBadRequest(RuntimeException ex){
 		
-		return ResponseEntity.badRequest().body(ex.getMessage());
+		ErrorResponse error = new ErrorResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
 	}
 	
 	@ExceptionHandler(DuplicateTransactionException.class)
-	public ResponseEntity<String> handleDuplicateTransactionException(DuplicateTransactionException ex){
+	public ResponseEntity<ErrorResponse> handleDuplicateTransactionException(DuplicateTransactionException ex){
 		
-		return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
+		ErrorResponse error = new ErrorResponse(HttpStatus.CONFLICT.value(), ex.getMessage());
+		return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
 	}
 	
 	@ExceptionHandler(TransactionNotFoundException.class)
-	public ResponseEntity<String> handleTransactionNotFoundException(TransactionNotFoundException ex){
+	public ResponseEntity<ErrorResponse> handleTransactionNotFoundException(TransactionNotFoundException ex){
 		
-		return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+		ErrorResponse error = new ErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage());
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
 	}
 }
