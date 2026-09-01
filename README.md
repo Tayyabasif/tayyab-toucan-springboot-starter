@@ -9,7 +9,7 @@ The challenge requires Java, Spring Boot, H2, Maven and JUnit, plus at least fou
 These rules are deliberately explicit because the challenge asks the candidate to define them:
 
 - `transactionId` and `customerId`: required.
-- `amount`: required, greater than 0, maximum 100,000.
+- `amount`: required, greater than 0, maximum 1000000.
 - `currency`: one of INR, USD.
 - `transactionType`: UPI or NEFT.
 - New transactions start as `PENDING`.
@@ -80,4 +80,4 @@ Run:
 - Currency-specific amount limits are not modeled.
 
 ## AI Usage Disclosure
-I used an Chatgpt AI coding assistant during the implementation and development process. The AI was used to help scaffold the Spring Boot implementation, suggest a package structure, generate the initial service-layer implementation, and create an initial test suite. The AI generated an initial version of the service class and suggested using it directly within the controller. After reviewing the generated design, I identified that directly using the concrete service class in the controller created tight coupling between the controller and service layer. To improve the design and achieve loose coupling, I introduced a service interface and made the generated service class implement that interface. The controller was then updated to depend on the interface rather than the concrete service implementation.
+I used Chatgpt AI coding assistant during the implementation and development process. The AI was used to help scaffold the Spring Boot implementation, suggest a package structure, generate the initial service-layer implementation, and create an initial test suite. The AI generated an initial version of the service class and suggested using it directly within the controller. After reviewing the generated design, I identified that directly using the concrete service class in the controller created tight coupling between the controller and service layer. To improve the design and achieve loose coupling, I introduced a service interface and made the generated service class implement that interface. The controller was then updated to depend on the interface rather than the concrete service implementation.
